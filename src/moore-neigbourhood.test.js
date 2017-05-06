@@ -32,25 +32,24 @@ class Cell {
     }  
 }
 
-function findLiveCells(cellGrid) {
-
-    // return cellGrid.filter((ele) => {
-    //     return ele.isAlive;
-    // })
+var a = new Array(50);
+for (let i = 0; i < 50; i++) {
+    a[i] = new Array(50);
+    for (let j = 0; j < 50; j++) {
+        a[i][j] = new Cell(i, j, getRandomBoolean());
+    }
 }
 
-console.log(findLiveCells(() => {
-   
-    var a = new Array(50);
-    for (let i = 0; i < 50; i++) {
-        a[i] = new Array(50);
-        for (let j = 0; j < 50; j++) {
-            a[i][j] = new Cell(i, j, Math.floor(Math.random(1)));
-        }
-    }
-    console.log(a);
-    return a;
-}))
+function findLiveCells(cellGrid) {
+
+    let flattenedGrid = steamroller(cellGrid);
+    return flattenedGrid.filter(function(cell) {
+        return cell.isAlive;
+    }) 
+   // return cellGrid; 
+}
+
+console.log(findLiveCells(a))
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
@@ -64,3 +63,25 @@ function getRandomBoolean() {
 
 console.log(new Cell(4, 4, getRandomBoolean()));
 
+// flatten is called recursively
+// for each element that is an array 
+function flatten(a, b) {
+  var c;
+  if(Array.isArray(b)) {
+     c = b.reduce(flatten, []);
+  } 
+  else {
+    c = b;
+  }
+  return a.concat(c);
+}
+
+function steamroller(arr) {
+  // I'm a steamroller, baby
+  // flatten arrays into one
+  return arr.reduce(flatten, []);     
+}
+
+console.log(steamroller([1, [2], [3, [[4]]]]));
+console.log(steamroller([[["a"]], [["b"]]]));
+console.log(steamroller([[["a"]], [["b"]]]));
