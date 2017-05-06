@@ -81,7 +81,3 @@ function steamroller(arr) {
   // flatten arrays into one
   return arr.reduce(flatten, []);     
 }
-
-console.log(steamroller([1, [2], [3, [[4]]]]));
-console.log(steamroller([[["a"]], [["b"]]]));
-console.log(steamroller([[["a"]], [["b"]]]));
