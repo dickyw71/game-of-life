@@ -76,11 +76,9 @@ function getRandomIntInclusive(min, max) {
 
 
 /**
- * Finds live cells in the grid and puts them and their neighbours into an array
- * Each live cell neighbourhood array is then put into an array of all neighbourhoods
- * Problems: if x or y indices are 0 the code throws an undefined error for x-1 or y-1
- * Fix to-do: if x or y are 0 change the value of x-1 or y-1 to grid.length
- * @param {*} grid 
+ * Finds live cells in the grid and puts each on and it's moore-neighbours into an array
+ * Each live cell neighbourhood is then put into an array of neighbourhoods
+ * @param {*} grid - the Game of Life grid of cells
  */
 function findLiveNeighourhoods(grid) {
 
@@ -111,7 +109,14 @@ function findLiveNeighourhoods(grid) {
     return liveNeighbourhoods;
 }
 
-
+/**
+ * Returns an array of cells from the grid starting with the cell passed to the function 
+ * and then each cell in the moore-neighbourhood of the cell passed to the function
+ * the neighbours are ordered by the compass bearing relative to the centre cell 
+ * starting at West then proceeding in a clockwise direction 
+ * @param {*} cell - at the centre of the neighbourhood
+ * @param {*} grid - the Game of Life grid of cells
+ */
 function findNeighbourhoodCells(cell, grid) {
  
     let neigbourhood = [];
@@ -120,23 +125,23 @@ function findNeighbourhoodCells(cell, grid) {
     let yMinusOne = cell.y > 0 ? cell.y-1 : grid.length-1;
     let yPlusOne = cell.y < grid.length-1 ? cell.y+1 : 0;
 
-    neigbourhood.push(grid[cell.y][cell.x]);
-    neigbourhood.push(grid[cell.y][xMinusOne]);
-    neigbourhood.push(grid[yMinusOne][xMinusOne]);
-    neigbourhood.push(grid[yMinusOne][cell.x]);
-    neigbourhood.push(grid[yMinusOne][xPlusOne]);
-    neigbourhood.push(grid[cell.y][xPlusOne]);
-    neigbourhood.push(grid[yPlusOne][xPlusOne]);
-    neigbourhood.push(grid[yPlusOne][cell.x]);
-    neigbourhood.push(grid[yPlusOne][xMinusOne]);
+    neigbourhood.push(grid[cell.y][cell.x]);        //  Centre cell
+    neigbourhood.push(grid[cell.y][xMinusOne]);     //  West
+    neigbourhood.push(grid[yMinusOne][xMinusOne]);  //  North-west
+    neigbourhood.push(grid[yMinusOne][cell.x]);     //  North
+    neigbourhood.push(grid[yMinusOne][xPlusOne]);   //  North-east
+    neigbourhood.push(grid[cell.y][xPlusOne]);      //  East
+    neigbourhood.push(grid[yPlusOne][xPlusOne]);    //  South-East
+    neigbourhood.push(grid[yPlusOne][cell.x]);      //  South
+    neigbourhood.push(grid[yPlusOne][xMinusOne]);   //  South-west
 
     return neigbourhood;
 }
 
 
-function sumLiveCells(grid) {
+function sumLive(cells) {
     let sum = 0;
-    grid.forEach((cell) => {
+    cells.forEach((cell) => {
         if(cell.isAlive) {
             sum++;
         }
@@ -145,14 +150,13 @@ function sumLiveCells(grid) {
 }
 
 /**
- * Returns the value of the cell in the next generation of the game
+ * Returns the value of the cells in the row in the next generation of the game
  * @param {*} row 
  * @param {*} i - the index of the current row
  * @param {*} arr - a 2D array of cells
  */
 function nextGeneration(row, i, arr) {
-
-    
+ 
     return row.map((cell) => {
         let _cell = new Cell(cell.x, cell.y, cell.isAlive);
         // if cell is in a live neighbourhood calculate it's next state
@@ -175,30 +179,32 @@ function nextGeneration(row, i, arr) {
             }
         }
 
-        if(cellNeighbourhood) {
-            
-            let neigbouringCells = findNeighbourhoodCells(cell, arr);
-            let sum = sumLiveCells(neigbouringCells);
-
-            switch(sum) {
-                case 3: 
-                // Life
-                _cell.isAlive = true;
-                break;
-                case 4:
-                // centre cell stays the same
-                break;
-                default:
-                // Death
-                _cell.isAlive = false;
-                break;
-            }
+        if(cellNeighbourhood) {          
+            let neigbours = findNeighbourhoodCells(cell, arr);
+            _cell.isAlive = prognosis(sumLive(neigbours));
         }
+
         return _cell;
     });
 }
 
+function prognosis(sumLiveCells) {
 
+    let life = false;
+
+    switch(sumLiveCells) {
+        case 3: 
+        life = true;       // Life!
+        break;
+        case 4:           // centre cell stays the same
+        break;
+        default:
+        // Death
+        life = false;
+        break;
+    } 
+    return life;
+}
 
 
 
