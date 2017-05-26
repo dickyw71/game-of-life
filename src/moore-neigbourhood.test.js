@@ -43,6 +43,36 @@ let blinkerGen2 = [[new Cell(0,0,false), new Cell(1,0,false), new Cell(2,0,false
                         [new Cell(0,3,false), new Cell(1,3,false), new Cell(2,3,false), new Cell(3,3,false), new Cell(4,3,false)],
                         [new Cell(0,4,false), new Cell(1,4,false), new Cell(2,4,false), new Cell(3,4,false), new Cell(4,4,false)]];
 
+let diagonalGen1 = [[new Cell(0,0,false), new Cell(1,0,false), new Cell(2,0,false), new Cell(3,0,false), new Cell(4,0,false)],
+                        [new Cell(0,1,false), new Cell(1,1,false), new Cell(2,1,false), new Cell(3,1,true), new Cell(4,1,false)],
+                        [new Cell(0,2,false), new Cell(1,2,false), new Cell(2,2,true), new Cell(3,2,false), new Cell(4,2,false)],
+                        [new Cell(0,3,false), new Cell(1,3,true), new Cell(2,3,false), new Cell(3,3,false), new Cell(4,3,false)],
+                        [new Cell(0,4,false), new Cell(1,4,false), new Cell(2,4,false), new Cell(3,4,false), new Cell(4,4,false)]];
+
+let diagonalGen2 = [[new Cell(0,0,false), new Cell(1,0,false), new Cell(2,0,false), new Cell(3,0,false), new Cell(4,0,false)],
+                        [new Cell(0,1,false), new Cell(1,1,false), new Cell(2,1,false), new Cell(3,1,false), new Cell(4,1,false)],
+                        [new Cell(0,2,false), new Cell(1,2,false), new Cell(2,2,true), new Cell(3,2,false), new Cell(4,2,false)],
+                        [new Cell(0,3,false), new Cell(1,3,false), new Cell(2,3,false), new Cell(3,3,false), new Cell(4,3,false)],
+                        [new Cell(0,4,false), new Cell(1,4,false), new Cell(2,4,false), new Cell(3,4,false), new Cell(4,4,false)]];
+
+let nothing = [[new Cell(0,0,false), new Cell(1,0,false), new Cell(2,0,false), new Cell(3,0,false), new Cell(4,0,false)],
+                        [new Cell(0,1,false), new Cell(1,1,false), new Cell(2,1,false), new Cell(3,1,false), new Cell(4,1,false)],
+                        [new Cell(0,2,false), new Cell(1,2,false), new Cell(2,2,false), new Cell(3,2,false), new Cell(4,2,false)],
+                        [new Cell(0,3,false), new Cell(1,3,false), new Cell(2,3,false), new Cell(3,3,false), new Cell(4,3,false)],
+                        [new Cell(0,4,false), new Cell(1,4,false), new Cell(2,4,false), new Cell(3,4,false), new Cell(4,4,false)]];
+
+let triomino =         [[new Cell(0,0,false), new Cell(1,0,false), new Cell(2,0,false), new Cell(3,0,false), new Cell(4,0,false)],
+                        [new Cell(0,1,false), new Cell(1,1,false), new Cell(2,1,true), new Cell(3,1,true), new Cell(4,1,false)],
+                        [new Cell(0,2,false), new Cell(1,2,false), new Cell(2,2,true), new Cell(3,2,false), new Cell(4,2,false)],
+                        [new Cell(0,3,false), new Cell(1,3,false), new Cell(2,3,false), new Cell(3,3,false), new Cell(4,3,false)],
+                        [new Cell(0,4,false), new Cell(1,4,false), new Cell(2,4,false), new Cell(3,4,false), new Cell(4,4,false)]];
+
+let square4 =          [[new Cell(0,0,false), new Cell(1,0,false), new Cell(2,0,false), new Cell(3,0,false), new Cell(4,0,false)],
+                        [new Cell(0,1,false), new Cell(1,1,false), new Cell(2,1,true), new Cell(3,1,true), new Cell(4,1,false)],
+                        [new Cell(0,2,false), new Cell(1,2,false), new Cell(2,2,true), new Cell(3,2,true), new Cell(4,2,false)],
+                        [new Cell(0,3,false), new Cell(1,3,false), new Cell(2,3,false), new Cell(3,3,false), new Cell(4,3,false)],
+                        [new Cell(0,4,false), new Cell(1,4,false), new Cell(2,4,false), new Cell(3,4,false), new Cell(4,4,false)]];
+
 it('should return the correct generation 2 blinker grid', () => {
 
     let bg2 = blinkerGen1.map(nextGeneration);
@@ -53,6 +83,32 @@ it('should return the correct generation 3 blinker grid', () => {
 
     let bg3 = blinkerGen2.map(nextGeneration);
     expect(bg3).toEqual(blinkerGen1);
+})
+
+it('should return the correct 2nd generation of the diagonal line', () => {
+
+    let dg2 = diagonalGen1.map(nextGeneration);
+    expect(dg2).toEqual(diagonalGen2);
+})
+
+it('should return the correct 3rd generation of the diagonal line', () => {
+
+    let dg3 = diagonalGen2.map(nextGeneration);
+    expect(dg3).toEqual(nothing);
+})
+
+it('should return the correct 2nd generation of the triomino square', () => {
+
+    let triSq = triomino.map(nextGeneration);
+    expect(triSq).toEqual(square4);
+
+})
+
+it('should return the correct 3nd generation of the triomino square', () => {
+
+    let triSq = square4.map(nextGeneration);
+    expect(triSq).toEqual(square4);
+    
 })
 
 var cellGrid = new Array(50);
@@ -181,16 +237,16 @@ function nextGeneration(row, i, arr) {
 
         if(cellNeighbourhood) {          
             let neigbours = findNeighbourhoodCells(cell, arr);
-            _cell.isAlive = prognosis(sumLive(neigbours));
+            _cell.isAlive = prognosis(sumLive(neigbours), _cell.isAlive);
         }
 
         return _cell;
     });
 }
 
-function prognosis(sumLiveCells) {
+function prognosis(sumLiveCells, isAlive) {
 
-    let life = false;
+    let life = isAlive;
 
     switch(sumLiveCells) {
         case 3: 
