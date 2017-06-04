@@ -1,5 +1,9 @@
 ## Tests
-- The moore neigbourhood module should calculate which cells are alive in the next generation based on the current generation
+- ~~The moore neigbourhood module should calculate which cells are alive in the next generation based on the current generation.~~
+- When I first arrive at the game, it will randomly generate a board (and start playing).
+- ~~Make prognosis a static method of the Cell class.~~
+- ~~Move Moore-neighourhood functions to external file and import them into the test module.~~
+- Refactor Moore-Neighbourhood to move the non-neighbourhood board stuff out to the board module.
 
 Algorithm 
 
