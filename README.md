@@ -1,1 +1,1 @@
-# Conway's Game of Life implementated using React
+# Conway's Game of Life implementated using ReactJS
