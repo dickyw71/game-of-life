@@ -29,13 +29,33 @@ let style  = {
     }
 }
 class GameControls extends Component {
+    constructor(props) {
+        super(props);
+
+        this.start = this.start.bind(this);
+        this.stop = this.stop.bind(this);
+        this.clear = this.clear.bind(this);
+    }
+
+    start() {
+
+    }
+
+    stop() {
+
+    }
+
+    clear() {
+
+    }
+
     render() {
         return (
             <div style={style.controls}>
                 <ButtonGroup>
-                    <Button bsStyle="primary" onClick={this.props.start}>Start</Button>
-                    <Button bsStyle="primary" onClick={this.props.stop}>Stop</Button>
-                    <Button bsStyle="warning" onClick={this.props.clear}>Clear</Button>
+                    <Button bsStyle="primary" onClick={this.start}>Start</Button>
+                    <Button bsStyle="primary" onClick={this.stop}>Stop</Button>
+                    <Button bsStyle="warning" onClick={this.clear}>Clear</Button>
                 </ButtonGroup>
             </div>    
         )
@@ -46,7 +66,7 @@ class GameBoard extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { board: Board.generateBoard() };      
+        this.state = { board: Board.generateBlinker() };      
     }
 
     render() {
