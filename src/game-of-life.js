@@ -62,6 +62,12 @@ class GameControls extends Component {
     }
 }
 
+class GameGenerationCounter extends Component {
+    render() {
+        return <h3>Generation: {this.props.generation || 0}</h3>
+    }
+}
+
 class GameBoard extends Component {
 
     constructor(props) {
@@ -114,4 +120,4 @@ class GameCell extends Component {
     }
 }
 
-export { GameControls, GameBoard };
+export { GameControls, GameGenerationCounter, GameBoard };

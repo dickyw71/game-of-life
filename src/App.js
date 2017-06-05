@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { GameControls, GameBoard } from './game-of-life.js';
+import { GameControls, GameGenerationCounter, GameBoard } from './game-of-life.js';
 
 class App extends Component {
   render() {
@@ -12,6 +12,7 @@ class App extends Component {
           <h2>Conway's Game of Life</h2>
         </div>
         <GameControls />
+        <GameGenerationCounter />
         <GameBoard />
       </div>
     );
