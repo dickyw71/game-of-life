@@ -38,15 +38,15 @@ class GameControls extends Component {
     }
 
     start() {
-
+        this.props.startGame();
     }
 
     stop() {
-
+        this.props.stopGame();
     }
 
     clear() {
-
+        this.props.clearGame();
     }
 
     render() {
@@ -64,15 +64,22 @@ class GameControls extends Component {
 
 class GameGenerationCounter extends Component {
     render() {
-        return <h3>Generation: {this.props.generation || 0}</h3>
+        return <h3>Generation: {this.props.genCount || 0}</h3>
     }
 }
 
 class GameBoard extends Component {
-
     constructor(props) {
         super(props);
         this.state = { board: Board.generateBlinker() };      
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props !== nextProps) {
+            this.setState((prevState) => {
+                return { board: prevState.board.map(Board.nextGeneration)};
+            })
+        }
     }
 
     render() {
