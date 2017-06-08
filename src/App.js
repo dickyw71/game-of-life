@@ -24,11 +24,14 @@ class App extends Component {
 
 
   startGame() {
-      this.timerId = setInterval(this.newGeneration, 1000);    
+      if(!this.timerId) {
+        this.timerId = setInterval(this.newGeneration, 1000);    
+      }
   }
 
   stopGame() {
     clearInterval(this.timerId);
+    this.timerId = 0;
   }
 
   clearGame() {
