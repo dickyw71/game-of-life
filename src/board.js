@@ -1,20 +1,31 @@
 import Cell from './cell.js';
 import * as MooreNeighbourhood from './moore-neighbourhood.js';
 
-export let generateBoard = function() {
+export function generateEmpty() {
+   var cellGrid = new Array(50);
+    for (let i = 0; i < 50; i++) {
+        cellGrid[i] = new Array(50);
+        for (let j = 0; j < 50; j++) {
+            cellGrid[i][j] = new Cell(j, i, false);
+        }
+    }
+    return cellGrid;
+}
 
-    var cellGrid = new Array(5);
+export function generateRandom() {
+
+    let cellGrid = new Array(5);
     for (let i = 0; i < 5; i++) {
         cellGrid[i] = new Array(5);
         for (let j = 0; j < 5; j++) {
-            cellGrid[i][j] = new Cell(i, j, getRandomBoolean());
+            cellGrid[i][j] = new Cell(j, i, getRandomBoolean());
         }
     }
     return cellGrid;
 }
 
 function getRandomBoolean() {
-    return getRandomIntInclusive(0, 1);
+    return Boolean(getRandomIntInclusive(0, 1));
 }
 
 function getRandomIntInclusive(min, max) {
@@ -23,12 +34,44 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+export function addBlinker(board, top, left) {
+
+    // copy board
+    let cellGrid = new Array(50);
+    for (let i = 0; i < 50; i++) {
+        cellGrid[i] = new Array(50);
+        for (let j = 0; j < 50; j++) {
+            cellGrid[i][j] = board[i][j];
+        }
+    }
+    // add a blinker
+    cellGrid[top][left+1].isAlive = true;
+    cellGrid[top+1][left+1].isAlive = true;
+    cellGrid[top+2][left+1].isAlive = true;
+    
+    return cellGrid;
+}
 export function generateBlinker() {
     return [[new Cell(0,0,false), new Cell(1,0,false), new Cell(2,0,false), new Cell(3,0,false), new Cell(4,0,false)],
             [new Cell(0,1,false), new Cell(1,1,false), new Cell(2,1,true), new Cell(3,1,false), new Cell(4,1,false)],
             [new Cell(0,2,false), new Cell(1,2,false), new Cell(2,2,true), new Cell(3,2,false), new Cell(4,2,false)],
             [new Cell(0,3,false), new Cell(1,3,false), new Cell(2,3,true), new Cell(3,3,false), new Cell(4,3,false)],
             [new Cell(0,4,false), new Cell(1,4,false), new Cell(2,4,false), new Cell(3,4,false), new Cell(4,4,false)]];
+}
+
+export function generateChequer() {
+    return [[new Cell(0,0,false), new Cell(1,0,true), new Cell(2,0,false), new Cell(3,0,true), new Cell(4,0,false)],
+            [new Cell(0,1,true), new Cell(1,1,false), new Cell(2,1,true), new Cell(3,1,false), new Cell(4,1,true)],
+            [new Cell(0,2,false), new Cell(1,2,true), new Cell(2,2,false), new Cell(3,2,true), new Cell(4,2,false)],
+            [new Cell(0,3,true), new Cell(1,3,false), new Cell(2,3,true), new Cell(3,3,false), new Cell(4,3,true)],
+            [new Cell(0,4,false), new Cell(1,4,true), new Cell(2,4,false), new Cell(3,4,true), new Cell(4,4,false)]];
+}
+
+export function clear(row) {
+    return row.map((cell) => {
+        cell.isAlive = false;
+        return cell;
+    })
 }
 
 /**
