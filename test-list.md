@@ -1,9 +1,13 @@
 ## Tests
 - ~~The moore neigbourhood module should calculate which cells are alive in the next generation based on the current generation.~~
-- When I first arrive at the game, it will randomly generate a board (and start playing).
+- ~~When I first arrive at the game, it will randomly generate a board (and start playing).~~
 - ~~Make prognosis a static method of the Cell class.~~
 - ~~Move Moore-neighourhood functions to external file and import them into the test module.~~
-- Refactor Moore-Neighbourhood to move the non-neighbourhood board stuff out to the board module.
+- ~~Refactor Moore-Neighbourhood to move the non-neighbourhood board stuff out to the board module.~~
+- **When I clear the board the generation is reset to zero and the game stops.**
+- I can setup the board by changing the size (width and height).
+- I can change the rate that new generations are created.
+- Only update a grid cell if its state (alive/dead) has changed.
 
 Algorithm 
 
