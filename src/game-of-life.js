@@ -74,17 +74,9 @@ class GameBoard extends Component {
         this.state = { board: Board.generateBlinker() };      
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(this.props !== nextProps) {
-            this.setState((prevState) => {
-                return { board: prevState.board.map(Board.nextGeneration)};
-            })
-        }
-    }
-
     render() {
         // generate board components
-        let gridOfCells = this.state.board.map( (rowOfCells) => {
+        let gridOfCells = this.props.board.map( (rowOfCells) => {
             return rowOfCells.map((cell) => {
                 return <GameCell cell={cell} />
             })
@@ -127,4 +119,18 @@ class GameCell extends Component {
     }
 }
 
-export { GameControls, GameGenerationCounter, GameBoard };
+class BoardControls extends Component {
+    render() {
+        return (
+            <div style={style.controls}>
+                <ButtonGroup>
+                    <Button bsStyle="default" onClick={this.small}>Small</Button>
+                    <Button bsStyle="default" onClick={this.medium}>Medium</Button>
+                    <Button bsStyle="default" onClick={this.large}>Large</Button>
+                </ButtonGroup>
+            </div>    
+        )
+    }    
+}
+
+export { GameControls, GameGenerationCounter, GameBoard, BoardControls };
