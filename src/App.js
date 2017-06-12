@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { GameControls, GameGenerationCounter, GameBoard } from './game-of-life.js';
+import { GameControls, GameGenerationCounter, GameBoard, BoardControls } from './game-of-life.js';
+import * as Board from './board.js'; 
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { generation: 1 }
-    let timerId = 0;
+    this.state = { generation: 1, board: Board.generateRandom()}
+    this.timerId = 0;
 
     this.newGeneration = this.newGeneration.bind(this);
     this.startGame = this.startGame.bind(this);
@@ -18,14 +19,17 @@ class App extends Component {
 
   newGeneration() {
     this.setState((prevState) => {
-      return {generation: prevState.generation + 1 };
+      return {
+        generation: prevState.generation + 1, 
+        board: prevState.board.map(Board.nextGeneration) 
+      };
     })
   }
 
 
   startGame() {
       if(!this.timerId) {
-        this.timerId = setInterval(this.newGeneration, 1000);    
+        this.timerId = setInterval(this.newGeneration, 200);    
       }
   }
 
@@ -35,11 +39,14 @@ class App extends Component {
   }
 
   clearGame() {
-    // to-do
+    this.stopGame();
+    this.setState((prevState) => {
+      return {generation: 0, board: prevState.board.map(Board.clear) }
+    });    
   }
 
  componentDidMount() {
-      this.startGame();
+    this.startGame();
   }
 
   render() {
@@ -51,7 +58,8 @@ class App extends Component {
         </div>
         <GameControls startGame={this.startGame} stopGame={this.stopGame} clearGame={this.clearGame}/>
         <GameGenerationCounter genCount={this.state.generation}/>
-        <GameBoard genCount={this.state.generation}/>
+        <GameBoard genCount={this.state.generation} board={this.state.board}/>
+        <BoardControls />
       </div>
     );
   }
