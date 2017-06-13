@@ -71,14 +71,13 @@ class GameGenerationCounter extends Component {
 class GameBoard extends Component {
     constructor(props) {
         super(props);
-        this.state = { board: Board.generateBlinker() };      
     }
 
     render() {
         // generate board components
         let gridOfCells = this.props.board.map( (rowOfCells) => {
             return rowOfCells.map((cell) => {
-                return <GameCell cell={cell} />
+                return <GameCell cell={cell} toggleCell={this.props.toggleCell}/>
             })
         })
 
@@ -94,11 +93,13 @@ class GameCell extends Component {
     constructor(props) {
         super(props);
 
-        this.toggleCell = this.toggleCell.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
-    toggleCell() {
+    toggle() {
         // do something
+        // toggle cell state
+        this.props.toggleCell(this.props.cell);
     }
 
     render() {
@@ -112,7 +113,7 @@ class GameCell extends Component {
         return (
             <div 
                 style={style.cell} 
-                onClick={this.toggleCell}
+                onClick={this.toggle}
             >
             </div>    
         )
