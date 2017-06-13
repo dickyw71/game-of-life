@@ -6,6 +6,7 @@
 - ~~Refactor Moore-Neighbourhood to move the non-neighbourhood board stuff out to the board module.~~
 - ~~When I clear the board the generation is reset to zero and the game stops.~~
 - I can setup the board by changing the size (width and height).
+- ~~I can setup the board state by selecting each cell.~~
 - I can change the rate that new generations are created.
 - Only update a grid cell if its state (alive/dead) has changed since the last generation.
 
