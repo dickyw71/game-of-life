@@ -14,6 +14,7 @@ class App extends Component {
     this.startGame = this.startGame.bind(this);
     this.stopGame = this.stopGame.bind(this);
     this.clearGame = this.clearGame.bind(this);
+    this.toggleCell = this.toggleCell.bind(this);
 
   }
 
@@ -45,6 +46,13 @@ class App extends Component {
     });    
   }
 
+  toggleCell(cell) {
+   // find cell in board and update
+   let delta = this.state.board;
+   delta[cell.y][cell.x].isAlive ? delta[cell.y][cell.x].isAlive = false : delta[cell.y][cell.x].isAlive = true;
+   this.setState({ board: delta});
+  }
+
  componentDidMount() {
     this.startGame();
   }
@@ -58,7 +66,7 @@ class App extends Component {
         </div>
         <GameControls startGame={this.startGame} stopGame={this.stopGame} clearGame={this.clearGame}/>
         <GameGenerationCounter genCount={this.state.generation}/>
-        <GameBoard genCount={this.state.generation} board={this.state.board}/>
+        <GameBoard genCount={this.state.generation} board={this.state.board} toggleCell={this.toggleCell}/>
         <BoardControls />
       </div>
     );
