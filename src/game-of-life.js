@@ -15,8 +15,8 @@ let style  = {
         lineHeight: "0px"
     },
     cell: {
-        width: "100px",
-        height: "100px",
+        width: "10px",
+        height: "10px",
         background: "#000",
         border: "1px solid #555",
         display: "inline-block"
@@ -89,6 +89,7 @@ class GameCell extends Component {
     constructor(props) {
         super(props);
 
+        this.state = { isAlive: this.props.cell.isAlive };
         this.toggle = this.toggle.bind(this);
     }
 
@@ -98,8 +99,14 @@ class GameCell extends Component {
         this.props.toggleCell(this.props.cell);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.cell.isAlive !== this.state.isAlive) {
+            this.setState({ isAlive: nextProps.cell.isAlive });
+        }
+    }
+
     render() {
-        if(this.props.cell.isAlive) {
+        if(this.state.isAlive) {
             style.cell.background = style.infant.background;
         }
         else {
