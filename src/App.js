@@ -62,7 +62,11 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Conway's Game of Life</h2>
+          <h2>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.math.cornell.edu/~lipa/mec/lesson6.html">
+            Conway's Game of Life
+            </a>
+          </h2>
         </div>
         <div className="container">
           <GameControls startGame={this.startGame} stopGame={this.stopGame} clearGame={this.clearGame}/>
