@@ -12,12 +12,12 @@ export function generateEmpty() {
     return cellGrid;
 }
 
-export function generateRandom() {
+export function generateRandom(width, height) {
 
-    let cellGrid = new Array(5);
-    for (let i = 0; i < 5; i++) {
-        cellGrid[i] = new Array(5);
-        for (let j = 0; j < 5; j++) {
+    let cellGrid = new Array(height || 5);
+    for (let i = 0; i < (height || 5); i++) {
+        cellGrid[i] = new Array(width || 5);
+        for (let j = 0; j < (width || 5); j++) {
             cellGrid[i][j] = new Cell(j, i, getRandomBoolean());
         }
     }
