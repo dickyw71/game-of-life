@@ -7,7 +7,7 @@ import * as Board from './board.js';
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { generation: 1, board: Board.generateRandom()}
+    this.state = { generation: 1, board: Board.generateRandom(50, 50)}
     this.timerId = 0;
 
     this.newGeneration = this.newGeneration.bind(this);
