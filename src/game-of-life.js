@@ -6,6 +6,7 @@ let style  = {
         margin: "20px"
     },
     board: {
+        margin: "auto",
         width: "542px",
         height: "542px",
         border: "20px solid #AF876B",
