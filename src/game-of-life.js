@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ButtonGroup, Button } from 'react-bootstrap'
-import * as Board from './board.js'; 
 
 let style  = {
     controls: {
@@ -53,8 +52,8 @@ class GameControls extends Component {
         return (
             <div style={style.controls}>
                 <ButtonGroup>
-                    <Button bsStyle="primary" onClick={this.start}>Start</Button>
-                    <Button bsStyle="primary" onClick={this.stop}>Stop</Button>
+                    <Button bsStyle="primary" onClick={this.start}>Run</Button>
+                    <Button bsStyle="primary" onClick={this.stop}>Pause</Button>
                     <Button bsStyle="warning" onClick={this.clear}>Clear</Button>
                 </ButtonGroup>
             </div>    
@@ -69,10 +68,6 @@ class GameGenerationCounter extends Component {
 }
 
 class GameBoard extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         // generate board components
         let gridOfCells = this.props.board.map( (rowOfCells) => {
