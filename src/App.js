@@ -64,10 +64,12 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Conway's Game of Life</h2>
         </div>
-        <GameControls startGame={this.startGame} stopGame={this.stopGame} clearGame={this.clearGame}/>
-        <GameGenerationCounter genCount={this.state.generation}/>
-        <GameBoard genCount={this.state.generation} board={this.state.board} toggleCell={this.toggleCell}/>
-        <BoardControls />
+        <div className="container">
+          <GameControls startGame={this.startGame} stopGame={this.stopGame} clearGame={this.clearGame}/>
+          <GameGenerationCounter genCount={this.state.generation}/>
+          <GameBoard genCount={this.state.generation} board={this.state.board} toggleCell={this.toggleCell}/>
+          <BoardControls />
+        </div>
       </div>
     );
   }
