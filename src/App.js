@@ -4,6 +4,22 @@ import './App.css';
 import { GameControls, GameGenerationCounter, GameBoard, BoardControls } from './game-of-life.js';
 import * as Board from './board.js'; 
 
+let style  = {
+    controls: {
+        margin: "20px"
+    },
+    board: {
+        margin: "auto",
+        width: "542px",
+        height: "542px",
+        border: "20px solid #AF876B",
+        borderRadius: "20px",
+        padding: "1px",
+        lineHeight: "0px"
+    }
+};
+
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -69,10 +85,10 @@ class App extends Component {
           </h2>
         </div>
         <div className="container">
-          <GameControls startGame={this.startGame} stopGame={this.stopGame} clearGame={this.clearGame}/>
+          <GameControls style={style.controls} startGame={this.startGame} stopGame={this.stopGame} clearGame={this.clearGame}/>
           <GameGenerationCounter genCount={this.state.generation}/>
-          <GameBoard genCount={this.state.generation} board={this.state.board} toggleCell={this.toggleCell}/>
-          <BoardControls />
+          <GameBoard style={style.board} board={this.state.board} toggleCell={this.toggleCell}/>
+          <BoardControls style={style.controls}/>
         </div>
       </div>
     );
