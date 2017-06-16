@@ -1,33 +1,6 @@
 import React, { Component } from 'react';
 import { ButtonGroup, Button } from 'react-bootstrap'
 
-let style  = {
-    controls: {
-        margin: "20px"
-    },
-    board: {
-        margin: "auto",
-        width: "542px",
-        height: "542px",
-        border: "20px solid #AF876B",
-        borderRadius: "20px",
-        padding: "1px",
-        lineHeight: "0px"
-    },
-    cell: {
-        width: "10px",
-        height: "10px",
-        background: "#000",
-        border: "1px solid #555",
-        display: "inline-block"
-    },
-    mature: {
-        background: "#f00"
-    },
-    infant: {
-        background: "#fe0"
-    }
-}
 class GameControls extends Component {
     constructor(props) {
         super(props);
@@ -51,13 +24,11 @@ class GameControls extends Component {
 
     render() {
         return (
-            <div style={style.controls}>
-                <ButtonGroup>
-                    <Button bsStyle="primary" onClick={this.start}>Run</Button>
-                    <Button bsStyle="primary" onClick={this.stop}>Pause</Button>
-                    <Button bsStyle="warning" onClick={this.clear}>Clear</Button>
-                </ButtonGroup>
-            </div>    
+            <ButtonGroup style={this.props.style}>
+                <Button bsStyle="primary" onClick={this.start}>Run</Button>
+                <Button bsStyle="primary" onClick={this.stop}>Pause</Button>
+                <Button bsStyle="warning" onClick={this.clear}>Clear</Button>
+            </ButtonGroup>   
         )
     }
 }
@@ -69,6 +40,7 @@ class GameGenerationCounter extends Component {
 }
 
 class GameBoard extends Component {
+
     render() {
         // generate board components
         let gridOfCells = this.props.board.map( (rowOfCells) => {
@@ -78,9 +50,9 @@ class GameBoard extends Component {
         })
 
         return (
-            <div style={style.board}>
-                {gridOfCells}
-            </div>    
+            <div style={this.props.style}>
+                {gridOfCells}   
+            </div>
         )
     }
 }
@@ -91,6 +63,18 @@ class GameCell extends Component {
 
         this.state = { isAlive: this.props.cell.isAlive };
         this.toggle = this.toggle.bind(this);
+        this.style = {
+            cell: {
+                width: "10px",
+                height: "10px",
+                background: "#000",
+                border: "1px solid #555",
+                display: "inline-block"
+            },
+            infant: {
+                background: "#fe0"
+            }
+        };
     }
 
     toggle() {
@@ -107,15 +91,15 @@ class GameCell extends Component {
 
     render() {
         if(this.state.isAlive) {
-            style.cell.background = style.infant.background;
+            this.style.cell.background = this.style.infant.background;
         }
         else {
-            style.cell.background = "#000";
+            this.style.cell.background = "#000";
         }
 
         return (
             <div 
-                style={style.cell} 
+                style={this.style.cell} 
                 onClick={this.toggle}
             >
             </div>    
@@ -126,13 +110,11 @@ class GameCell extends Component {
 class BoardControls extends Component {
     render() {
         return (
-            <div style={style.controls}>
-                <ButtonGroup>
-                    <Button bsStyle="default" onClick={this.small}>Small</Button>
-                    <Button bsStyle="default" onClick={this.medium}>Medium</Button>
-                    <Button bsStyle="default" onClick={this.large}>Large</Button>
-                </ButtonGroup>
-            </div>    
+            <ButtonGroup style={this.props.style}>
+                <Button bsStyle="default" onClick={this.small}>Small</Button>
+                <Button bsStyle="default" onClick={this.medium}>Medium</Button>
+                <Button bsStyle="default" onClick={this.large}>Large</Button>
+            </ButtonGroup> 
         )
     }    
 }
