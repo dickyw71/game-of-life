@@ -101,28 +101,9 @@ export function nextGeneration(row, i, arr) {
     return row.map((cell) => {
         let _cell = new Cell(cell.x, cell.y, cell.isAlive);
         // if cell is in a live neighbourhood calculate it's next state
-        // else the cell is dead and the state remains unchanged
-
-        /**
-         * Is this cell in a neighbourhood with a current live cell
-         * if so copy the neighbourhood containing this cell and a live cell 
-         * to cellNeighbourhood
-         */
-        // let cellNeighbourhood;
-        // for(let neighbourhood of MooreNeighbourhood.findLiveOnes(arr)) {
-        //     if (neighbourhood.some( (el) => {
-        //         return (el.x === cell.x) && (el.y === cell.y)
-        //     })) {
-        //         // cell found
-        //         cellNeighbourhood = neighbourhood;
-        //         break; // exit for...of
-        //     }
-        // }
-
-        // if(cellNeighbourhood) {          
-            let neighbours = MooreNeighbourhood.find(cell, arr);
-            _cell.isAlive = Cell.prognosis(sumLive(neighbours), _cell.isAlive);
-        // }
+        // else the cell is dead and the state remains unchanged         
+        let neighbours = MooreNeighbourhood.find(cell, arr);
+        _cell.isAlive = Cell.prognosis(sumLive(neighbours), cell.isAlive);
 
         return _cell;
     });
