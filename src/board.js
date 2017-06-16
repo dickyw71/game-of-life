@@ -108,21 +108,21 @@ export function nextGeneration(row, i, arr) {
          * if so copy the neighbourhood containing this cell and a live cell 
          * to cellNeighbourhood
          */
-        let cellNeighbourhood;
-        for(let neighbourhood of MooreNeighbourhood.findLiveOnes(arr)) {
-            if (neighbourhood.some( (el) => {
-                return (el.x === cell.x) && (el.y === cell.y)
-            })) {
-                // cell found
-                cellNeighbourhood = neighbourhood;
-                break; // exit for...of
-            }
-        }
+        // let cellNeighbourhood;
+        // for(let neighbourhood of MooreNeighbourhood.findLiveOnes(arr)) {
+        //     if (neighbourhood.some( (el) => {
+        //         return (el.x === cell.x) && (el.y === cell.y)
+        //     })) {
+        //         // cell found
+        //         cellNeighbourhood = neighbourhood;
+        //         break; // exit for...of
+        //     }
+        // }
 
-        if(cellNeighbourhood) {          
+        // if(cellNeighbourhood) {          
             let neighbours = MooreNeighbourhood.find(cell, arr);
             _cell.isAlive = Cell.prognosis(sumLive(neighbours), _cell.isAlive);
-        }
+        // }
 
         return _cell;
     });
