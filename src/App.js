@@ -46,7 +46,7 @@ class App extends Component {
 
   startGame() {
       if(!this.timerId) {
-        this.timerId = setInterval(this.newGeneration, 100);    
+        this.timerId = setInterval(this.newGeneration, 1000/30);    
       }
   }
 
