@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { ButtonGroup, Button } from 'react-bootstrap'
+import { ButtonGroup, Button } from 'react-bootstrap';
+import './game-of-life.css';
 
 class GameControls extends Component {
     constructor(props) {
@@ -60,46 +61,38 @@ class GameBoard extends Component {
 class GameCell extends Component {
     constructor(props) {
         super(props);
-
-        this.state = { isAlive: this.props.cell.isAlive };
+        this.state = { 
+            isAlive: this.props.cell.isAlive, 
+            class: this.props.cell.isAlive ? "cell infant" : "cell" };
         this.toggle = this.toggle.bind(this);
-        this.style = {
-            cell: {
-                width: "10px",
-                height: "10px",
-                background: "#000",
-                border: "1px solid #555",
-                display: "inline-block"
-            },
-            infant: {
-                background: "#fe0"
-            }
-        };
     }
 
     toggle() {
-        // do something
-        // toggle cell state
+         // toggle cell state
         this.props.toggleCell(this.props.cell);
     }
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.cell.isAlive !== this.state.isAlive) {
-            this.setState({ isAlive: nextProps.cell.isAlive });
+            this.setState({   
+                    isAlive: nextProps.cell.isAlive, 
+                    class: nextProps.cell.isAlive ? "cell infant" : "cell" 
+                });
+        }
+        else {
+            if(this.state.class === "cell infant") {
+                this.setState({
+                    isAlive: nextProps.cell.isAlive, 
+                    class: "cell mature"                
+                })
+            }
         }
     }
 
     render() {
-        if(this.state.isAlive) {
-            this.style.cell.background = this.style.infant.background;
-        }
-        else {
-            this.style.cell.background = "#000";
-        }
-
         return (
             <div 
-                style={this.style.cell} 
+                className={this.state.class} 
                 onClick={this.toggle}
             >
             </div>    
