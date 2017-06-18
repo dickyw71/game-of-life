@@ -1,0 +1,11 @@
+
+    .cell {
+        width: 10px;
+        height: 10px;
+        background-color: #000;
+        border: 1px solid #555;
+        display: inline-block;
+    }
+    .infant { background-color: #fd0; }
+    .mature { background-color: #f00; }
+    .dead   { background-color: #000; }
