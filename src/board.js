@@ -97,13 +97,16 @@ export function sumLive(cells) {
  * @returns {Array}
  */
 export function nextGeneration(row, i, arr) {
- 
+    
     return row.map((cell) => {
+        // clone the cell so we don't mutate the input object
         let _cell = new Cell(cell.x, cell.y, cell.isAlive);
         // if cell is in a live neighbourhood calculate it's next state
-        // else the cell is dead and the state remains unchanged         
+        // else the cell is dead and the state remains unchanged 
         let neighbours = MooreNeighbourhood.find(cell, arr);
-        _cell.isAlive = Cell.prognosis(sumLive(neighbours), cell.isAlive);
+        if(neighbours.some(ele => ele.isAlive)) {
+            _cell.isAlive = Cell.prognosis(sumLive(neighbours), cell.isAlive);
+        }
 
         return _cell;
     });
