@@ -26,8 +26,8 @@ class GameControls extends Component {
     render() {
         return (
             <ButtonGroup style={this.props.style}>
-                <Button bsStyle="primary" onClick={this.start}>Run</Button>
-                <Button bsStyle="primary" onClick={this.stop}>Pause</Button>
+                <Button bsStyle="primary" onClick={this.start}><i className="fa fa-play" aria-hidden="true"></i></Button>
+                <Button bsStyle="primary" onClick={this.stop}><i className="fa fa-pause" aria-hidden="true"></i></Button>
                 <Button bsStyle="warning" onClick={this.clear}>Clear</Button>
             </ButtonGroup>   
         )
