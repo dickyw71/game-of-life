@@ -101,6 +101,15 @@ class GameCell extends Component {
 }
 
 class BoardControls extends Component {
+    constructor(props) {
+        super(props);
+
+        this.small = this.small.bind(this);
+    }
+    small() {
+        this.props.smallBoard();
+    }
+
     render() {
         return (
             <ButtonGroup style={this.props.style}>

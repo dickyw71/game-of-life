@@ -31,7 +31,9 @@ class App extends Component {
     this.stopGame = this.stopGame.bind(this);
     this.clearGame = this.clearGame.bind(this);
     this.toggleCell = this.toggleCell.bind(this);
-
+    this.smallBoard = this.smallBoard.bind(this);
+ //   this.mediumBoard = this.mediumBoard.bind(this);
+ //   this.largeBoard = this.largeBoard.bind(this);
   }
 
   newGeneration() {
@@ -69,7 +71,13 @@ class App extends Component {
    this.setState({ board: delta});
   }
 
- componentDidMount() {
+  smallBoard() {
+    //  clear game
+    this.clearGame();
+    this.state = { generation: 1, board: Board.generateRandom(20, 20)}    
+  }
+
+  componentDidMount() {
     this.startGame();
   }
 
@@ -88,7 +96,7 @@ class App extends Component {
           <GameControls style={style.controls} startGame={this.startGame} stopGame={this.stopGame} clearGame={this.clearGame}/>
           <GameGenerationCounter genCount={this.state.generation}/>
           <GameBoard style={style.board} board={this.state.board} toggleCell={this.toggleCell}/>
-          <BoardControls style={style.controls}/>
+          <BoardControls style={style.controls} smallBoard={this.smallBoard}/>
         </div>
       </div>
     );
