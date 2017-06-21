@@ -105,11 +105,21 @@ class BoardControls extends Component {
         super(props);
 
         this.small = this.small.bind(this);
+        this.medium = this.medium.bind(this);
+        this.large = this.large.bind(this);
     }
     small() {
         this.props.smallBoard();
     }
 
+    medium() {
+        this.props.mediumBoard();
+    }
+
+    large() {
+        this.props.largeBoard();
+    }
+    
     render() {
         return (
             <ButtonGroup style={this.props.style}>
