@@ -32,8 +32,8 @@ class App extends Component {
     this.clearGame = this.clearGame.bind(this);
     this.toggleCell = this.toggleCell.bind(this);
     this.smallBoard = this.smallBoard.bind(this);
- //   this.mediumBoard = this.mediumBoard.bind(this);
- //   this.largeBoard = this.largeBoard.bind(this);
+    this.mediumBoard = this.mediumBoard.bind(this);
+    this.largeBoard = this.largeBoard.bind(this);
   }
 
   newGeneration() {
@@ -74,9 +74,36 @@ class App extends Component {
   smallBoard() {
     //  clear game
     this.clearGame();
+    // clone board style
+    let boardStyle = Object.assign({}, style.board);
+    style.board = boardStyle;
+    style.board.height = "242px";
+    style.board.width = "242px";
     this.state = { generation: 1, board: Board.generateRandom(20, 20)}    
   }
 
+  mediumBoard() {
+    //  clear game
+    this.clearGame();
+    // clone board style
+    let boardStyle = Object.assign({}, style.board);
+    style.board = boardStyle;
+    style.board.height = "542px";
+    style.board.width = "542px";
+    this.state = { generation: 1, board: Board.generateRandom(50, 50)}    
+  }
+
+  largeBoard() {
+    //  clear game
+    this.clearGame();
+    // clone board style
+    let boardStyle = Object.assign({}, style.board);
+    style.board = boardStyle;
+    style.board.height = "842px";
+    style.board.width = "842px";
+    this.state = { generation: 1, board: Board.generateRandom(80, 80)}        
+  }
+  
   componentDidMount() {
     this.startGame();
   }
@@ -96,7 +123,7 @@ class App extends Component {
           <GameControls style={style.controls} startGame={this.startGame} stopGame={this.stopGame} clearGame={this.clearGame}/>
           <GameGenerationCounter genCount={this.state.generation}/>
           <GameBoard style={style.board} board={this.state.board} toggleCell={this.toggleCell}/>
-          <BoardControls style={style.controls} smallBoard={this.smallBoard}/>
+          <BoardControls style={style.controls} smallBoard={this.smallBoard} mediumBoard={this.mediumBoard} largeBoard={this.largeBoard}/>
         </div>
       </div>
     );
