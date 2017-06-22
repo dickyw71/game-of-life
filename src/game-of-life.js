@@ -36,7 +36,7 @@ class GameControls extends Component {
 
 class GameGenerationCounter extends Component {
     render() {
-        return <h3>Generation: {this.props.genCount || 0}</h3>
+        return <h4>Generation: {this.props.genCount || 0}</h4>
     }
 }
 
