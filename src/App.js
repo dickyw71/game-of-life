@@ -11,7 +11,7 @@ let style  = {
     board: {
         margin: "auto",
         width: "542px",
-        height: "542px",
+        height: "342px",
         border: "20px solid #AF876B",
         borderRadius: "20px",
         padding: "1px",
@@ -23,7 +23,7 @@ let style  = {
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { generation: 1, board: Board.generateRandom(50, 50)}
+    this.state = { generation: 1, board: Board.generateRandom(50, 30)}
     this.timerId = 0;
 
     this.newGeneration = this.newGeneration.bind(this);
@@ -78,8 +78,8 @@ class App extends Component {
     let boardStyle = Object.assign({}, style.board);
     style.board = boardStyle;
     style.board.height = "242px";
-    style.board.width = "242px";
-    this.state = { generation: 1, board: Board.generateRandom(20, 20)}    
+    style.board.width = "342px";
+    this.state = { generation: 1, board: Board.generateRandom(30, 20)}    
   }
 
   mediumBoard() {
@@ -88,9 +88,9 @@ class App extends Component {
     // clone board style
     let boardStyle = Object.assign({}, style.board);
     style.board = boardStyle;
-    style.board.height = "542px";
+    style.board.height = "342px";
     style.board.width = "542px";
-    this.state = { generation: 1, board: Board.generateRandom(50, 50)}    
+    this.state = { generation: 1, board: Board.generateRandom(50, 30)}    
   }
 
   largeBoard() {
@@ -99,9 +99,9 @@ class App extends Component {
     // clone board style
     let boardStyle = Object.assign({}, style.board);
     style.board = boardStyle;
-    style.board.height = "842px";
+    style.board.height = "542px";
     style.board.width = "842px";
-    this.state = { generation: 1, board: Board.generateRandom(80, 80)}        
+    this.state = { generation: 1, board: Board.generateRandom(80, 50)}        
   }
   
   componentDidMount() {
@@ -123,6 +123,7 @@ class App extends Component {
           <GameControls style={style.controls} startGame={this.startGame} stopGame={this.stopGame} clearGame={this.clearGame}/>
           <GameGenerationCounter genCount={this.state.generation}/>
           <GameBoard style={style.board} board={this.state.board} toggleCell={this.toggleCell}/>
+          <h4>Choose board size</h4>
           <BoardControls style={style.controls} smallBoard={this.smallBoard} mediumBoard={this.mediumBoard} largeBoard={this.largeBoard}/>
         </div>
       </div>
