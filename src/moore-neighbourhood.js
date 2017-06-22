@@ -30,8 +30,8 @@ export function findLiveOnes(grid) {
 export function find(cell, grid) {
  
     let neighbourhood = [];
-    let xMinusOne = cell.x > 0 ? cell.x-1 : grid.length-1;
-    let xPlusOne = cell.x < grid.length-1 ? cell.x+1 : 0;
+    let xMinusOne = cell.x > 0 ? cell.x-1 : grid[0].length-1;
+    let xPlusOne = cell.x < grid[0].length-1 ? cell.x+1 : 0;
     let yMinusOne = cell.y > 0 ? cell.y-1 : grid.length-1;
     let yPlusOne = cell.y < grid.length-1 ? cell.y+1 : 0;
 
@@ -47,4 +47,3 @@ export function find(cell, grid) {
 
     return neighbourhood;
 }
-
