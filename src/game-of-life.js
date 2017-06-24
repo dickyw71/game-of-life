@@ -1,6 +1,29 @@
 import React, { Component } from 'react';
-import { ButtonGroup, Button } from 'react-bootstrap';
+import { Grid, Row, Col, ButtonGroup, Button } from 'react-bootstrap';
 import './game-of-life.css';
+
+class GameGenerationControls extends Component {
+    render() {
+        return (
+            <Grid style={this.props.style}>
+                <Row className="show-grid">
+                    <Col md={6} >    
+                        <GameControls  
+                            startGame={this.props.startGame} 
+                            stopGame={this.props.stopGame} 
+                            clearGame={this.props.clearGame}
+                        />
+                    </Col>
+                    <Col md={6} mdPull={2}>
+                        <GameGenerationCounter 
+                            genCount={this.props.genCount}
+                        />
+                    </Col>    
+                </Row>
+            </Grid>
+        )
+    }
+}
 
 class GameControls extends Component {
     constructor(props) {
@@ -100,6 +123,27 @@ class GameCell extends Component {
     }
 }
 
+class GameBoardControls extends Component {
+    render() {
+        return (
+            <Grid style={this.props.style}>
+                <Row className="show-grid">
+                    <Col md={6}>
+                       <h4>Choose board size:</h4>
+                    </Col>
+                    <Col md={6} mdPull={1}>
+                        <BoardControls 
+                            smallBoard={this.props.smallBoard} 
+                            mediumBoard={this.props.mediumBoard} 
+                            largeBoard={this.props.largeBoard}
+                        />
+                    </Col>    
+                </Row>
+            </Grid>
+        )
+    }
+}
+
 class BoardControls extends Component {
     constructor(props) {
         super(props);
@@ -131,4 +175,4 @@ class BoardControls extends Component {
     }    
 }
 
-export { GameControls, GameGenerationCounter, GameBoard, BoardControls };
+export { GameGenerationControls, GameBoard, GameBoardControls };
