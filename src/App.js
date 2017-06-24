@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { GameControls, GameGenerationCounter, GameBoard, BoardControls } from './game-of-life.js';
+import { GameGenerationControls, GameBoard, GameBoardControls } from './game-of-life.js';
 import * as Board from './board.js'; 
 
 let style  = {
     controls: {
-        margin: "20px"
+        margin: "0px auto 0px auto",
+        width: "500px",
+        background: "#AF876B",
+        padding: "4px"
     },
     board: {
         margin: "auto",
@@ -119,12 +122,28 @@ class App extends Component {
             </a>
           </h2>
         </div>
-        <div className="container">
-          <GameControls style={style.controls} startGame={this.startGame} stopGame={this.stopGame} clearGame={this.clearGame}/>
-          <GameGenerationCounter genCount={this.state.generation}/>
-          <GameBoard style={style.board} board={this.state.board} toggleCell={this.toggleCell}/>
-          <h4>Choose board size</h4>
-          <BoardControls style={style.controls} smallBoard={this.smallBoard} mediumBoard={this.mediumBoard} largeBoard={this.largeBoard}/>
+        <div className="game container">
+          <GameGenerationControls 
+            className="game-generation-controls"
+            style={style.controls}
+            genCount={this.state.generation}
+            startGame={this.startGame} 
+            stopGame={this.stopGame} 
+            clearGame={this.clearGame}
+          />
+          <GameBoard 
+            className="game-board"
+            style={style.board} 
+            board={this.state.board} 
+            toggleCell={this.toggleCell}
+          />
+          <GameBoardControls
+            className="game-board-controls"
+            style={style.controls} 
+            smallBoard={this.smallBoard} 
+            mediumBoard={this.mediumBoard} 
+            largeBoard={this.largeBoard}
+          />
         </div>
       </div>
     );
