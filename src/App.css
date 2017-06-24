@@ -18,6 +18,14 @@
   font-size: large;
 }
 
+.game {
+  margin: auto;
+  background-color: #A1A2A3;
+  width: 880px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
