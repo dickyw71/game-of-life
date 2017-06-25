@@ -26,7 +26,12 @@ let style  = {
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { generation: 1, board: Board.generateRandom(50, 30)}
+    this.gridWidth = 50;
+    this.gridHeight = 30;
+    this.state = { 
+      generation: 1, 
+      board: Board.generateRandom(this.gridWidth, this.gridHeight)
+    }
     this.timerId = 0;
 
     this.newGeneration = this.newGeneration.bind(this);
@@ -51,6 +56,7 @@ class App extends Component {
 
   startGame() {
       if(!this.timerId) {
+        console.log("Game Started");
         this.timerId = setInterval(this.newGeneration, 1000/30);    
       }
   }
@@ -75,30 +81,31 @@ class App extends Component {
   }
 
   smallBoard() {
-    //  clear game
-    this.clearGame();
+    // resize board
+    this.gridWidth = 30;
+    this.gridHeight = 20;
     // clone board style
     let boardStyle = Object.assign({}, style.board);
     style.board = boardStyle;
-    style.board.height = "242px";
-    style.board.width = "342px";
-    this.state = { generation: 1, board: Board.generateRandom(30, 20)}    
+    style.board.width = this.gridWidth*10 + 42 + "px";
+    style.board.height = this.gridHeight*10 + 42 + "px";
+
+    this.state = { 
+      generation: 1, 
+      board: Board.generateRandom(this.gridWidth, this.gridHeight)
+    }    
   }
 
   mediumBoard() {
-    //  clear game
-    this.clearGame();
     // clone board style
     let boardStyle = Object.assign({}, style.board);
     style.board = boardStyle;
-    style.board.height = "342px";
     style.board.width = "542px";
+    style.board.height = "342px";
     this.state = { generation: 1, board: Board.generateRandom(50, 30)}    
   }
 
   largeBoard() {
-    //  clear game
-    this.clearGame();
     // clone board style
     let boardStyle = Object.assign({}, style.board);
     style.board = boardStyle;
