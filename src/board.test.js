@@ -166,14 +166,4 @@ xit('should add a blinker to the empty grid', () => {
     expect(blinkerAdded[top+1][left+1].isAlive).toEqual(true);
     expect(blinkerAdded[top+2][left+1].isAlive).toEqual(true);
    
-    let blinkerAdded2 = blinkerAdded.map(Board.nextGeneration);
-    //console.log(MooreNeighbourhood.findLiveOnes(blinkerAdded2));
-    // console.log(blinkerAdded2[top][left+1]);
-    // expect(blinkerAdded2[top][left+1].isAlive).toEqual(false);
-    // expect(blinkerAdded2[top+1][left+1].isAlive).toEqual(true);
-    // expect(blinkerAdded2[top+2][left+1].isAlive).toEqual(false);
-    // expect(blinkerAdded2[top+1][left-1].isAlive).toEqual(true);
-    // expect(blinkerAdded2[top+1][left+2].isAlive).toEqual(true);
- 
-   
 })
