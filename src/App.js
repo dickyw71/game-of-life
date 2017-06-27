@@ -13,8 +13,6 @@ let style  = {
     },
     board: {
         margin: "auto",
-        width: "793px",
-        height: "493px",
         border: "20px solid #AF876B",
         borderRadius: "20px",
         padding: "1px",
@@ -28,8 +26,9 @@ class App extends Component {
     super(props)
     this.gridWidth = 50;
     this.gridHeight = 30;
-    this.cellWidth = 15;
-    this.cellHeight = 15;
+    this.cellWidth = 12;
+    this.cellHeight = 12;
+    this.gridSpacing = 42;
     this.state = { 
       generation: 1, 
       board: Board.generateRandom(this.gridWidth, this.gridHeight)
@@ -44,7 +43,7 @@ class App extends Component {
     this.smallBoard = this.smallBoard.bind(this);
     this.mediumBoard = this.mediumBoard.bind(this);
     this.largeBoard = this.largeBoard.bind(this);
-    this.updateBoardSize = this.updateBoardSize.bind(this);
+    this.setupBoard = this.setupBoard.bind(this);
   }
 
   newGeneration() {
@@ -83,12 +82,12 @@ class App extends Component {
    this.setState({ board: delta});
   }
 
-  updateBoardSize() {
+  setupBoard() {
     // clone board style
     let boardStyle = Object.assign({}, style.board);
     style.board = boardStyle;
-    style.board.width = this.gridWidth*this.cellWidth + 43 + "px";
-    style.board.height = this.gridHeight*this.cellHeight + 43 + "px";
+    style.board.width = this.gridWidth*this.cellWidth + this.gridSpacing + "px";
+    style.board.height = this.gridHeight*this.cellHeight + this.gridSpacing + "px";
 
     this.state = { 
       generation: 1, 
@@ -99,22 +98,29 @@ class App extends Component {
   smallBoard() {
     this.gridWidth = 30;
     this.gridHeight = 20;
-    this.updateBoardSize();
+    this.cellWidth = 12;
+    this.cellHeight = 12;
+    this.setupBoard();
   }
 
   mediumBoard() {
     this.gridWidth = 50;
     this.gridHeight = 30;
-    this.updateBoardSize();
+    this.cellWidth = 12;
+    this.cellHeight = 12;
+    this.setupBoard();
   }
 
   largeBoard() {
     this.gridWidth = 80;
     this.gridHeight = 50;
-    this.updateBoardSize();  
+    this.cellWidth = 12;
+    this.cellHeight = 12; 
+    this.setupBoard();  
   }
   
   componentDidMount() {
+    this.setupBoard();
     this.startGame();
   }
 
