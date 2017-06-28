@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { GameGenerationControls, GameBoard, GameBoardControls } from './game-of-life.js';
 import * as Board from './board.js'; 
@@ -29,6 +28,11 @@ class App extends Component {
     this.cellWidth = 12;
     this.cellHeight = 12;
     this.gridSpacing = 42;
+    // clone board style
+    let boardStyle = Object.assign({}, style.board);
+    style.board = boardStyle;
+    style.board.width = this.gridWidth*this.cellWidth + this.gridSpacing + "px";
+    style.board.height = this.gridHeight*this.cellHeight + this.gridSpacing + "px";
     this.state = { 
       generation: 1, 
       board: Board.generateRandom(this.gridWidth, this.gridHeight)
@@ -58,7 +62,6 @@ class App extends Component {
 
   startGame() {
       if(!this.timerId) {
-        console.log("Game Started");
         this.timerId = setInterval(this.newGeneration, 1000/30);    
       }
   }
@@ -100,7 +103,9 @@ class App extends Component {
     this.gridHeight = 20;
     this.cellWidth = 12;
     this.cellHeight = 12;
+    this.stopGame();
     this.setupBoard();
+    this.startGame();
   }
 
   mediumBoard() {
@@ -108,7 +113,9 @@ class App extends Component {
     this.gridHeight = 30;
     this.cellWidth = 12;
     this.cellHeight = 12;
+    this.stopGame();
     this.setupBoard();
+    this.startGame();
   }
 
   largeBoard() {
@@ -116,11 +123,12 @@ class App extends Component {
     this.gridHeight = 50;
     this.cellWidth = 12;
     this.cellHeight = 12; 
-    this.setupBoard();  
+    this.stopGame();
+    this.setupBoard();
+    this.startGame();  
   }
   
   componentDidMount() {
-    this.setupBoard();
     this.startGame();
   }
 
@@ -128,10 +136,12 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>
-            <a target="_blank" rel="noopener noreferrer" href="https://www.math.cornell.edu/~lipa/mec/lesson6.html">
-            Conway's Game of Life
+           <h2>
+            <a 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              href="https://www.math.cornell.edu/~lipa/mec/lesson6.html">
+              Conway's Game of Life
             </a>
           </h2>
         </div>
