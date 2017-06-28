@@ -6,9 +6,9 @@ import * as Board from './board.js';
 let style  = {
     controls: {
         margin: "0px auto 0px auto",
-        width: "500px",
-        background: "#AF876B",
-        padding: "4px"
+        width: "370px",
+        height: "38px",
+        background: "#AF876B"
     },
     board: {
         margin: "auto",
