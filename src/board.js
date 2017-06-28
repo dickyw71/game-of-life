@@ -81,10 +81,6 @@ export function clear(row) {
 export function sumLive(cells) {
     let sum = 0;
     cells.forEach((cell) => {
-        // if(cell.isAlive) {
-        //     sum++;
-        // }
-        // replace if with logical operation
         sum += cell.isAlive;
     })
     return sum;
@@ -103,15 +99,9 @@ export function nextGeneration(row, i, arr) {
     return row.map((cell) => {
         // clone the cell so we don't mutate the input object
         let _cell = new Cell(cell.x, cell.y, cell.isAlive);
-        // if cell is in a live neighbourhood calculate it's next state
+        // if cell is in a live neighbourhood calculate it's next life state
         // else the cell is dead and the state remains unchanged 
         let neighbours = MooreNeighbourhood.find(cell, arr);
-        // if(neighbours.some(ele => ele.isAlive)) {
-        //     _cell.isAlive = Cell.prognosis(sumLive(neighbours), cell.isAlive);
-        // }
-        // replace if with ternary conditional operation
-        //_cell.isAlive = neighbours.some(ele => ele.isAlive) ? Cell.prognosis(sumLive(neighbours), cell.isAlive) : false;
-        // replace ternary with logical operation
         _cell.isAlive = neighbours.some(ele => ele.isAlive) && Cell.prognosis(sumLive(neighbours), cell.isAlive);
 
         return _cell;
