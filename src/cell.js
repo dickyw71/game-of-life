@@ -17,11 +17,10 @@ class Cell {
             case 3: 
             life = true;       // Life!
             break;
-            case 4:            // Cell condition remains the same
+            case 4:            // Cell condition remains the same as isAlive
             break;
             default:
-            // Death
-            life = false;
+            life = false;      // Death
             break;
         } 
         return life;
