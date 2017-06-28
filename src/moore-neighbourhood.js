@@ -1,24 +1,4 @@
 
-/**
- * Finds live cells in the game grid and puts each one found and it's 'moore-neighbours' into an array
- * Each live cell neighbourhood is then put into a container array of live neighbourhoods
- * @param {Array} grid - the Game of Life grid of cells
- * @return {Array} - array of live neighbourhoods 
- */
-// export function findLiveOnes(grid) {
-
-//     let liveNeighbourhoods = [];
-
-//     for(let y=0; y<grid.length;y++) {
-//         for(let x=0; x<grid.length; x++) {
-//             if(grid[y][x].isAlive === true) {            
-//                 liveNeighbourhoods.push(find(grid[y][x], grid));
-//             }
-//             grid[y][x].isAlive === true ? liveNeighbourhoods.push(find(grid[y][x], grid)) : 0;
-//         }
-//     } 
-//     return liveNeighbourhoods;
-// }
 
 /**
  * Returns an array of cells from the grid starting with the cell passed to the function 
