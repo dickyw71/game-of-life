@@ -7,14 +7,14 @@ class GameGenerationControls extends Component {
         return (
             <Grid style={this.props.style}>
                 <Row className="show-grid">
-                    <Col md={6} >    
+                    <Col md={6} mdPush={1}>    
                         <GameControls  
                             startGame={this.props.startGame} 
                             stopGame={this.props.stopGame} 
                             clearGame={this.props.clearGame}
                         />
                     </Col>
-                    <Col md={6} mdPull={2}>
+                    <Col md={6}>
                         <GameGenerationCounter 
                             genCount={this.props.genCount}
                         />
@@ -128,10 +128,10 @@ class GameBoardControls extends Component {
         return (
             <Grid style={this.props.style}>
                 <Row className="show-grid">
-                    <Col md={6}>
-                       <h4>Change board size:</h4>
+                    <Col md={4} mdPush={1}>
+                       <h4>Board size:</h4>
                     </Col>
-                    <Col md={6} mdPull={1}>
+                    <Col md={8}>
                         <BoardControls 
                             smallBoard={this.props.smallBoard} 
                             mediumBoard={this.props.mediumBoard} 
@@ -148,28 +148,33 @@ class BoardControls extends Component {
     constructor(props) {
         super(props);
 
+        this.state = { smallActive: false, mediumActive: true, largeActive: false };
+
         this.small = this.small.bind(this);
         this.medium = this.medium.bind(this);
         this.large = this.large.bind(this);
     }
     small() {
+        this.setState({smallActive: true, mediumActive: false, largeActive: false})
         this.props.smallBoard();
     }
 
     medium() {
+        this.setState({smallActive: false, mediumActive: true, largeActive: false})
         this.props.mediumBoard();
     }
 
     large() {
+        this.setState({smallActive: false, mediumActive: false, largeActive: true})
         this.props.largeBoard();
     }
     
     render() {
         return (
             <ButtonGroup style={this.props.style}>
-                <Button bsStyle="default" onClick={this.small}>30x20</Button>
-                <Button bsStyle="default" onClick={this.medium}>50x30</Button>
-                <Button bsStyle="default" onClick={this.large}>80x50</Button>
+                <Button bsStyle="default" onClick={this.small} active={this.state.smallActive}>30x20</Button>
+                <Button bsStyle="default" onClick={this.medium} active={this.state.mediumActive}>50x30</Button>
+                <Button bsStyle="default" onClick={this.large} active={this.state.largeActive}>80x50</Button>
             </ButtonGroup> 
         )
     }    
