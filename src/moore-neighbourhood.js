@@ -5,19 +5,20 @@
  * @param {Array} grid - the Game of Life grid of cells
  * @return {Array} - array of live neighbourhoods 
  */
-export function findLiveOnes(grid) {
+// export function findLiveOnes(grid) {
 
-    let liveNeighbourhoods = [];
+//     let liveNeighbourhoods = [];
 
-    for(let y=0; y<grid.length;y++) {
-        for(let x=0; x<grid.length; x++) {
-            if(grid[y][x].isAlive === true) {            
-                liveNeighbourhoods.push(find(grid[y][x], grid));
-            }
-        }
-    } 
-    return liveNeighbourhoods;
-}
+//     for(let y=0; y<grid.length;y++) {
+//         for(let x=0; x<grid.length; x++) {
+//             if(grid[y][x].isAlive === true) {            
+//                 liveNeighbourhoods.push(find(grid[y][x], grid));
+//             }
+//             grid[y][x].isAlive === true ? liveNeighbourhoods.push(find(grid[y][x], grid)) : 0;
+//         }
+//     } 
+//     return liveNeighbourhoods;
+// }
 
 /**
  * Returns an array of cells from the grid starting with the cell passed to the function 
