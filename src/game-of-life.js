@@ -129,7 +129,7 @@ class GameBoardControls extends Component {
             <Grid style={this.props.style}>
                 <Row className="show-grid">
                     <Col md={6}>
-                       <h4>Choose board size:</h4>
+                       <h4>Change board size:</h4>
                     </Col>
                     <Col md={6} mdPull={1}>
                         <BoardControls 
@@ -167,9 +167,9 @@ class BoardControls extends Component {
     render() {
         return (
             <ButtonGroup style={this.props.style}>
-                <Button bsStyle="default" onClick={this.small}>Small</Button>
-                <Button bsStyle="default" onClick={this.medium}>Medium</Button>
-                <Button bsStyle="default" onClick={this.large}>Large</Button>
+                <Button bsStyle="default" onClick={this.small}>30x20</Button>
+                <Button bsStyle="default" onClick={this.medium}>50x30</Button>
+                <Button bsStyle="default" onClick={this.large}>80x50</Button>
             </ButtonGroup> 
         )
     }    
